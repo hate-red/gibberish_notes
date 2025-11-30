@@ -13,9 +13,9 @@ folders = [
     if path.is_dir() and path.name not in git_ingore
 ]
 
-# Ищем строки вида ==*какой-то текст*==
-# "==" с двух сторон для выделения цветом, "*" для курсива
-highlighting_pattern = r'==\*.+?\*=='
+# Паттерн для строк вида ==какой-то текст==
+# "==" с двух сторон для выделения цветом
+highlighting_pattern = r'==..+?.=='
 
 
 def format_file(file_path: Path, pattern: str) -> None:
@@ -25,7 +25,7 @@ def format_file(file_path: Path, pattern: str) -> None:
 
     file_contents = Path(path).read_text()
     matches = re.findall(highlighting_pattern, file_contents)
-    
+
     for match in matches:
         # Удаляем только выделение, курсив сохраняем
         file_contents = file_contents.replace(match, match[2:-2])
